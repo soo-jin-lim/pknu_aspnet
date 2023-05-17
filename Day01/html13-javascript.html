@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script>
+        //alert(1 + 30); // alert + debugging == alerugging
+        console.log("Hello, console log");
+        console.log('Second ' + ' log!!');
+        var a = 1;
+        var b = 3.141592;
+        console.log(a == b);
+        console.log(a === b); // js에만 있는 객체까지 모두 일치하는 경우
+        let c = 1.5;
+        console.log(c);
+
+        var radius = 10;
+        const pi = 3.141592; 
+        alert('원의 크기는 ' + radius * radius * pi);
+
+        function test() {
+            var i = 10;
+            return i * pi;
+        }
+
+        alert(test());
+        // javascript 특이한 함수 선언방식
+        var test2 = function () {
+            alert('test2');
+            alert('함수선언이 조금 다릅니다.');
+        }
+        test2();
+
+        // 객체 json javascript object notation        
+        var product = {
+            name: '7D 건조망고',
+            type: '당절임',
+            성분: ['망고', '설탕', '메타중아황산나트륨'],
+            원산지: '필리핀',
+            imported: true,
+            price: 5000,
+        }
+
+        console.log(product.name);
+        console.log(product['name']);
+        console.log(product.성분);
+        // C# foreach
+        for (var i in product) {
+            console.log(i + ' / ' + product[i]);
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
