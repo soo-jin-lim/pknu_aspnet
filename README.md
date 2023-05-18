@@ -13,5 +13,10 @@ ASP.NET 학습 리포지토리
 - 웹 기본
   - Javascript DOM
   - jQuery
-  - Bootstrap
-  - 웹페이지 프로젝트
+  - Bootstrap 기초
+  - Bootstrap 예제클로닝
+
+  ## 3일차
+- 웹 기본
+    - Bootstrap 예제클로닝
+    - 핀터레스트스타일페이지 클로닝

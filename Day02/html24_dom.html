@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Page Title</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script
+        src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+        crossorigin="anonymous"></script>
+    <script>
+        // jQuery로 온로드할때 방식 => 좀더 편함
+        $(document).ready(function(){
+            // 여기에 로직을 적으면 됨
+            var jumin1 = $('#jumin1');
+            var jumin2 = $('#jumin2');
+
+            jumin1.focus();
+
+            jumin1.keydown(function(){
+               if(jumin1.val().length>=6)
+                {
+                    jumin2.focus();
+                }
+            });
+
+            jumin2.keydown(function(event){
+                var event = event || window.event;
+                if(event.keyCode ==8 && jumin2.val().length == 0) //8 = backspace
+                {
+                    jumin1.focus();
+                }
+            })
+        });
+    </script>
+</head>
+<body>
+    <form>
+        <input type="text" name="jumin1" id="jumin1" maxlength="6">
+        <span>-</span>
+        <input type="text" name="jumin2" id ="jumin2" maxlength="7"><br>
+        <input type="submit" value="저장">
+    </form>
+</body>
+</html>

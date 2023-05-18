@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>jQuery</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js" 
+            integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" 
+            crossorigin="anonymous"></script>
+    <script>
+        // jQuery로 온로드할때 방식
+        $(document).ready(function () {
+            // 여기에 로직을 적으면 됨
+            // 앞쪽 function은 이벤트에 대한 처리함수
+            // , 뒤쪽 function 이벤트에 반대에 처리함수
+            $('h1').hover(function (event) {
+                $(this).css({
+                    backgroundColor: 'red',
+                    color: 'white'
+                });
+
+                event.preventDefault(); // 기존 이벤트를 제거
+            }, function () {
+                $(this).css({
+                    backgroundColor: '',
+                    color: ''
+                });
+            });
+        });
+    </script>
+</head>
+<body>
+    <h1>CLICK</h1>
+</body>
+</html>
