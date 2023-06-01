@@ -3,10 +3,11 @@ using aspnet02_boardapp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using MySqlConnector;
+using System.Diagnostics;
 
 namespace aspnet02_boardapp.Controllers
 {
-    // https://localhost:7125/Board/Index
+    // https://localhost:7059/Board/Index
     public class BoardController : Controller
     {
         private readonly ApplicationDbContext _db;
@@ -20,6 +21,7 @@ namespace aspnet02_boardapp.Controllers
         // endcout = 10, 20, 30, 40, 50 
         public IActionResult Index(int page = 1) // 게시판 최초화면 리스트
         {
+            ViewData["NoScroll"] = "true";  // 게시판은 메인스크롤 x
             // EntityFramework로 작업해도 되고
             //IEnumerable<Board> objBoardList = _db.Boards.ToList(); // SELECT * 쿼리
             // SQL 쿼리로 작업해도 됨
@@ -42,7 +44,6 @@ namespace aspnet02_boardapp.Controllers
             // HTML화면에서 사용하기 위해서 선언 == ViewData, TempData 동일한 역할
             ViewBag.StartPage = startPage;
             ViewBag.EndPage = endPage;
-
             ViewBag.Page = page;
             ViewBag.TotalPage = totalPage;
             ViewBag.StartCount = startCount; // 230525. 게시판 번호를 위해서 새로추가 
@@ -50,26 +51,20 @@ namespace aspnet02_boardapp.Controllers
             var StartCount = new MySqlParameter("startCount", startCount);
             var EndCount = new MySqlParameter("endCount", endCount);
 
-            List<Board>? objBoardList = null;
-            try
-            {
-                objBoardList = _db.Boards.FromSql($"CALL New_PagingBoard({StartCount}, {EndCount})").ToList();
-            }
-            catch (Exception)
-            {
-                TempData["error"] = "게시글이 없습니다.";
-                objBoardList = new List<Board>();
-            }            
+            var objBoardList = _db.Boards.FromSql($"CALL New_PagingBoard({StartCount}, {EndCount})").ToList();
 
             return View(objBoardList);
         }
 
-        // https://localhost:7125/Board/Create
+        // https://localhost:7059/Board/Create
         // GetMethod로 화면을 URL로 부를때 액션
 
         [HttpGet]
         public IActionResult Create() // 게시판 글쓰기
         {
+            ViewData["NoScroll"] = "true";  // 게시판은 메인스크롤 x
+
+
             return View();
         }
 
@@ -99,6 +94,9 @@ namespace aspnet02_boardapp.Controllers
         [HttpGet]
         public IActionResult Edit(int? Id)
         {
+            ViewData["NoScroll"] = "true";  // 게시판은 메인스크롤 x
+
+
             if (Id == null || Id == 0)
             {
                 return NotFound(); // Error.cshtml이 표시
@@ -131,6 +129,8 @@ namespace aspnet02_boardapp.Controllers
         [HttpGet]
         public IActionResult Delete(int? Id)
         {   // HttpGet Edit Action의 로직과 완전 동일
+            ViewData["NoScroll"] = "true";  // 게시판은 메인스크롤 x
+
             if (Id == null || Id == 0)
             {
                 return NotFound(); // Error.cshtml이 표시
@@ -167,6 +167,8 @@ namespace aspnet02_boardapp.Controllers
         [HttpGet]
         public IActionResult Details(int? Id)
         {
+            ViewData["NoScroll"] = "true";  // 게시판은 메인스크롤 x
+
             if (Id == null || Id == 0)
             {
                 return NotFound(); // Error.cshtml이 표시
